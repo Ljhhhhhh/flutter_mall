@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mall/Home.dart';
 import 'package:flutter_mall/components/icon.dart';
+import 'package:flutter_mall/userCenter.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,51 +30,46 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _currentIndex = 0;
 
-  void _incrementCounter() {
+  final _widgetItems = [HomeWidget(), UserWidget()];
+
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      print(index);
+      _currentIndex = index; //刷新界面
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        // backgroundColor: Colors.green,
-        // textTheme: ThemeData.light,
-        title: Text(widget.title)
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   // backgroundColor: Colors.green,
+      //   // textTheme: ThemeData.light,
+      //   title: Text(widget.title)
+      // ),
+      body: _widgetItems[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('首页')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text('我的')),
+        ], //BottomNavigationBarItem 的 icon 用的是 Icon Widget实现的，这里是随便找的图标，先实现功能，后续在改成和 豆瓣电影 的一样
+        currentIndex: _currentIndex, //默认选中的 index
+        fixedColor: Color(0xffE2B55D), //选中时颜色变为黑色
+        type: BottomNavigationBarType.fixed, //类型为 fixed
+        onTap: (_onItemTapped),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/home-banner.png"),
-                    fit: BoxFit.cover)),
-            width: MediaQuery.of(context).size.width,
-            height: 147.5,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(Iconfont.store, color: Colors.white),
-                Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Text('雅戈尔装饰有限公司',
-                        style: TextStyle(fontSize: 20, color: Colors.white))),
-              ],
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
