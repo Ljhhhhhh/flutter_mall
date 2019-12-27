@@ -88,10 +88,21 @@ class _MyHomePageState extends State<HomeWidgetState> {
                             )),
                         Material(
                             borderRadius: BorderRadius.circular(5),
-                            color: Colors.blue,
+                            // color: Colors.blue,
                             child: Container(
                               width: 185,
                               height: 75,
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[
+                                    Image(
+                                        image: AssetImage("images/home-menu2.png"),
+                                        width: 100.0)
+                                  ],
+                                ),
+                              ),
                             )),
                         // Expanded(
                         //   flex: 1,
