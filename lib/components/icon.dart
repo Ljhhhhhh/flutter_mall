@@ -7,6 +7,12 @@ class Iconfont{
       fontFamily: 'iconfont', 
       matchTextDirection: true
   );
+
+  static const IconData jifen = const IconData(
+      0xe60e, 
+      fontFamily: 'iconfont', 
+      matchTextDirection: true
+  );
   // 微信图标
   // static const IconData wechat = const IconData(
   //     0xec7d,  

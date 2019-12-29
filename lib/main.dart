@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '首页',
+      title: '37度礼购积分商城',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
       ),
-      home: MyHomePage(title: '首页'),
+      home: MyHomePage(title: '37度礼购积分商城'),
     );
   }
 }
