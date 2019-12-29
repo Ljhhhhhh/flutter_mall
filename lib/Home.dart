@@ -49,14 +49,14 @@ class _MyHomePageState extends State<HomeWidgetState> {
   void _getData() {
     setState(() {
       productListData = [
-        ProductData('奔驰', 3300, 4500,
-            'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData('宝马', 4300, 5500,
-            'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData('奥迪', 6300, 7500,
-            'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData('路虎', 6300, 7500,
-            'http://img.cixi518.com/ljh_logo.jpeg', 4567),
+        ProductData(
+            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+        ProductData(
+            '路虎', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 4567),
       ];
     });
   }
@@ -207,16 +207,27 @@ class _MyHomePageState extends State<HomeWidgetState> {
                         fontSize: 15,
                         height: 21 / 15,
                         fontWeight: FontWeight.bold)),
-                Row(
-                  children: <Widget>[
-                    Text('查看更多'),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Color(0xFF333333),
-                      size: 24,
-                    ),
-                  ],
-                )
+                // Row(
+                //   children: <Widget>[
+                //     Text('查看更多'),
+                //     Icon(
+                //       Icons.keyboard_arrow_right,
+                //       color: Color(0xFF333333),
+                //       size: 24,
+                //     ),
+                //   ],
+                // )
+                RaisedButton.icon(
+                  label: Text("查看更多"),
+                  icon: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Color(0xFF333333),
+                    size: 24,
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/Product');
+                  },
+                ),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/Home.dart';
-import 'package:flutter_mall/components/icon.dart';
+import 'package:flutter_mall/product/ProductList.dart';
 import 'package:flutter_mall/userCenter.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
       ),
-      home: MyHomePage(title: '37度礼购积分商城'),
+      initialRoute: '/Home',
+      routes: {
+        '/Home': (context) => MyHomePage(),
+        '/Product': (context) => ProductList(),
+      },
+      home: MyHomePage(),
     );
   }
 }
