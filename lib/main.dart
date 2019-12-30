@@ -11,15 +11,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '37度礼购积分商城',
+      routes: {
+        // '/': (context) => MyHomePage(),
+        '/Product': (context) => ProductList(),
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: Colors.white,
       ),
-      initialRoute: '/Home',
-      routes: {
-        '/Home': (context) => MyHomePage(),
-        '/Product': (context) => ProductList(),
-      },
       home: MyHomePage(),
     );
   }
@@ -49,32 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   // backgroundColor: Colors.green,
-      //   // textTheme: ThemeData.light,
-      //   title: Text(widget.title)
-      // ),
       body: _widgetItems[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('首页')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('首页')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text('我的')),
-        ], //BottomNavigationBarItem 的 icon 用的是 Icon Widget实现的，这里是随便找的图标，先实现功能，后续在改成和 豆瓣电影 的一样
-        currentIndex: _currentIndex, //默认选中的 index
-        fixedColor: Color(0xffE2B55D), //选中时颜色变为黑色
-        type: BottomNavigationBarType.fixed, //类型为 fixed
+              icon: Icon(Icons.account_circle), title: Text('我的')),
+        ],
+        currentIndex: _currentIndex,
+        fixedColor: Color(0xffE2B55D),
+        type: BottomNavigationBarType.fixed,
         onTap: (_onItemTapped),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

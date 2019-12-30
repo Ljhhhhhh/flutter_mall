@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/components/icon.dart';
+// import 'package:flutter_mall/main.dart';
 import 'package:flutter_mall/product/ProductData.dart';
 import 'package:flutter_mall/product/ProductItem.dart';
+import 'package:flutter_mall/product/ProductList.dart';
+// import 'package:flutter_mall/product/ProductList.dart';
 
 void main() => runApp(HomeWidget());
 
@@ -9,14 +12,7 @@ class HomeWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '37度礼购积分商城',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.white,
-      ),
-      home: HomeWidgetState(title: '首页'),
-    );
+    return HomeWidgetState(title: '首页');
   }
 }
 
@@ -207,27 +203,52 @@ class _MyHomePageState extends State<HomeWidgetState> {
                         fontSize: 15,
                         height: 21 / 15,
                         fontWeight: FontWeight.bold)),
-                // Row(
-                //   children: <Widget>[
-                //     Text('查看更多'),
-                //     Icon(
-                //       Icons.keyboard_arrow_right,
-                //       color: Color(0xFF333333),
-                //       size: 24,
-                //     ),
-                //   ],
-                // )
-                RaisedButton.icon(
-                  label: Text("查看更多"),
-                  icon: Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Color(0xFF333333),
-                    size: 24,
+                GestureDetector(
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text("查看更多", textAlign: TextAlign.right),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Color(0xFF333333),
+                        size: 24,
+                      ),
+                    ],
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/Product');
+                  onTap: () {
+                    // await Navigator.pushNamed(context, '/Product');
+                    // Navigator.pushNamed("/Product");
+                    Navigator.of(context).pushNamed("/Product");
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => ProductList()));
                   },
                 ),
+                // FlatButton(
+                //   child: Flex(
+                //     direction: Axis.horizontal,
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: <Widget>[
+                //       Text("查看更多", textAlign: TextAlign.right),
+                //       Icon(
+                //         Icons.keyboard_arrow_right,
+                //         color: Color(0xFF333333),
+                //         size: 24,
+                //       ),
+                //     ],
+                //   ),
+                //   textColor: Color(0xFF333333),
+                //   onPressed: () {
+                //     Navigator.pushNamed(context, '/Product');
+                //   }
+                //   // onPressed: () {
+                //   //   Navigator.push(
+                //   //       context,
+                //   //       MaterialPageRoute(
+                //   //           builder: (context) => ProductList(),
+                //   //           maintainState: false));
+                //   // },
+                // ),
               ],
             ),
           ),
