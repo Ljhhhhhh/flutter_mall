@@ -46,56 +46,55 @@ class ProductListWidget extends State<ProductList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF3F4F6),
       appBar: AppBar(
           centerTitle: true,
           // backgroundColor: Colors.green,
           // textTheme: ThemeData.light,
           title: Text('商品列表')),
-      body: Column(children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('123'),
-            Container(child: Text('1234'),),
-            Expanded(
+      body: Container(
+        // padding: EdgeInsets.all(8),
+        child: Column(children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text('价格', style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black54
+                ),),
+                Container(
+                  width: 8.5,
+                ),
+                Image.asset('images/sort-icon.png', width: 8)
+              ],
+            ),
+          ),
+          Expanded(
               flex: 1,
-              // height: 600,
               child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, //每行三列
-                          childAspectRatio: 172.5 / 232 //显示区域宽高相等
-                          ),
-                      itemCount: productListData.length,
-                      itemBuilder: (context, index) {
-                        return ProductItem(productListData[index]);
-                      })
-                      )
-            
-            // Row(
-            //   children: <Widget>[
-            //     Text('排序'),
-            //     Image.asset("images/sort-icon.png"),
-            //   ],
-            // ),
-            // Expanded(
-            //     flex: 1,
-            //     child: Container(
-            //       height: 30,
-            //       color: Colors.red,
-            //       child: Text('1'),
-            //     ))
-                // GridView.builder(
-                //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //           crossAxisCount: 2, //每行三列
-                //           childAspectRatio: 172.5 / 232 //显示区域宽高相等
-                //           ),
-                //       itemCount: productListData.length,
-                //       itemBuilder: (context, index) {
-                //         return ProductItem(productListData[index]);
-                //       })
-          ],
-        )
-      ]),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, //每行三列
+                      childAspectRatio: 172.5 / 232 //显示区域宽高相等
+                      ),
+                  itemCount: productListData.length,
+                  itemBuilder: (context, index) {
+                    return ProductItem(productListData[index]);
+                  }))
+
+          // GridView.builder(
+          //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //               crossAxisCount: 2, //每行三列
+          //               childAspectRatio: 172.5 / 232 //显示区域宽高相等
+          //               ),
+          //           itemCount: productListData.length,
+          //           itemBuilder: (context, index) {
+          //             return ProductItem(productListData[index]);
+          //           })
+          //           )
+        ]),
+      ),
     );
     // return
   }
