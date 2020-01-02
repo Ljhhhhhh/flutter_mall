@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mall/product/ProductData.dart';
+import 'package:flutter_mall/product/ProductItem.dart';
 
 class UserWidget extends StatefulWidget {
   @override
@@ -6,33 +8,146 @@ class UserWidget extends StatefulWidget {
 }
 
 class UserWidgetState extends State<UserWidget> {
+  List<ProductData> productListData = new List<ProductData>();
+  ScrollController _scrollController = new ScrollController();
+  bool isPerformingRequest = false;
+
   @override
-  Widget build(BuildContext context) {
-    // showModalBottomSheet()
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 200,
-      color: Colors.blue,
-      // constraints: BoxConstraints.expand(),
-      child: Stack(
-        alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
-        overflow: Overflow.visible,
-        children: <Widget>[
-          // Container(
-          //   child: Text("Hello world", style: TextStyle(color: Colors.white)),
-          //   color: Colors.red,
+  void initState() {
+    super.initState();
+    _getData();
+    _scrollController.addListener(() {
+//      print("滑动pixels："+_scrollController.position.pixels.toString());
+//      print("滑动maxScrollExtent："+_scrollController.position.maxScrollExtent.toString());
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData();
+      }
+    });
+    // print(productListData);
+  }
+
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<List<ProductData>> fakeRequest() async {
+    return Future.delayed(Duration(seconds: 2), () {
+      return [
+        ProductData(
+            '宝3马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '宝2马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '宝1马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      ];
+    });
+  }
+
+  void _getData() {
+    setState(() {
+      productListData = [
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+        ProductData(
+            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+        ProductData(
+            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+        ProductData(
+            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+        ProductData(
+            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+        ProductData(
+            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        ProductData(
+            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      ];
+    });
+  }
+
+  _getMoreData() async {
+    if (!isPerformingRequest) {
+      setState(() => isPerformingRequest = true);
+      List<ProductData> newEntries = await fakeRequest();
+      setState(() {
+        productListData.addAll(newEntries);
+        isPerformingRequest = false;
+      });
+    }
+  }
+
+  Widget _buildProgressIndicator() {
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Text('加载中……', style: TextStyle(fontSize: 50, color: Colors.red))
+          ]
+          // children: widget[](
+          //   Text('加载中……',style: TextStyle(
+          //   fontSize: 50,
+          //   color: Colors.red
+          // )
+          // )),
+          // child: new Opacity(
+          //   opacity: isPerformingRequest ? 1.0 : 0.0,
+          //   child: new CircularProgressIndicator(),
           // ),
-          Positioned(
-            left: 28.0,
-            top: 188,
-            child: Text("I am Jack"),
           ),
-          Positioned(
-            top: 58.0,
-            child: Text("Your friend"),
-          )
-        ],
-      ),
     );
   }
+
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        body: new RefreshIndicator(
+      onRefresh: _handleRefresh,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, //每行三列
+            childAspectRatio: 172.5 / 232 //显示区域宽高相等
+            ),
+        itemCount: productListData.length,
+        itemBuilder: (context, index) {
+          if (index == productListData.length) {
+            return _buildProgressIndicator();
+          } else {
+            return ProductItem(productListData[index]);
+          }
+        },
+        controller: _scrollController,
+      ),
+    ));
+  }
+
+  Future _handleRefresh() async {
+    // 延迟3秒后添加新数据， 模拟网络加载
+    await Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        print('refresh');
+        // _suggestions.clear();
+        // _suggestions.addAll(generateWordPairs().take(20));
+        // return _suggestions;
+      });
+    });
+  }
 }
+
+// class LoadMoreWidger extends StatelessWidget{
+//   @override
+
+// }
