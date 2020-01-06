@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/product/ProductData.dart';
 import 'package:flutter_mall/product/ProductItem.dart';
@@ -11,6 +12,8 @@ class UserWidgetState extends State<UserWidget> {
   List<ProductData> productListData = new List<ProductData>();
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
+  Response response;
+  Dio dio = Dio();
 
   @override
   void initState() {
@@ -44,7 +47,9 @@ class UserWidgetState extends State<UserWidget> {
     });
   }
 
-  void _getData() {
+  void _getData() async {
+    response = await dio.get('https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=宁波&start=0&count=10&client=&udid=');
+    print(response);
     setState(() {
       productListData = [
         ProductData(
