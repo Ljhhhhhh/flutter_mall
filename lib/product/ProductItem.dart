@@ -38,6 +38,8 @@ class ProductItemWidget extends State<ProductItem> {
                   alignment: Alignment.topLeft,
                   // 
                   child: Text(widget.productData.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 15,

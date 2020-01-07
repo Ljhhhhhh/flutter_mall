@@ -44,16 +44,17 @@ class _MyHomePageState extends State<HomeWidgetState> {
 
   void _getData() {
     setState(() {
-      productListData = [
-        ProductData(
-            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData(
-            '路虎', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 4567),
-      ];
+      productListData = [];
+      // productListData = [
+      //   ProductData(
+      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      //   ProductData(
+      //       '路虎', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 4567),
+      // ];
     });
   }
 

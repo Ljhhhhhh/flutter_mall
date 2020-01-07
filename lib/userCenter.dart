@@ -12,8 +12,9 @@ class UserWidgetState extends State<UserWidget> {
   List<ProductData> productListData = new List<ProductData>();
   ScrollController _scrollController = new ScrollController();
   bool isPerformingRequest = false;
-  Response response;
+  Response<dynamic> response;
   Dio dio = Dio();
+  var start = 0;
 
   @override
   void initState() {
@@ -37,50 +38,66 @@ class UserWidgetState extends State<UserWidget> {
   Future<List<ProductData>> fakeRequest() async {
     return Future.delayed(Duration(seconds: 2), () {
       return [
-        ProductData(
-            '宝3马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '宝2马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '宝1马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        // ProductData(
+        //     '宝3马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        // ProductData(
+        //     '宝2马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+        // ProductData(
+        //     '宝1马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
       ];
     });
   }
 
   void _getData() async {
-    response = await dio.get('https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=宁波&start=0&count=10&client=&udid=');
-    print(response);
+    response = await dio.get(
+        'https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=宁波&start=' +
+            start.toString() +
+            '&count=10&client=&udid=');
+    // print(response.data);
+    var data = response.data;
+    List<ProductData> newEntries = new List();
+    // List list = [];
+    for (dynamic product in data['subjects']) {
+      ProductData productData = ProductData.fromJson(product);
+      newEntries.add(productData);
+      // print(product.title);
+      // newEntries.add(ProductData(product.title, 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345));
+      // HotMovieData hotMovieData = HotMovieData.fromJson(data);
+      // serverDataList.add(hotMovieData);
+    }
+    // productListData.addAll(newEntries);
     setState(() {
-      productListData = [
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData(
-            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData(
-            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData(
-            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-        ProductData(
-            '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-        ProductData(
-            '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-        ProductData(
-            '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-      ];
+      productListData = newEntries;
+      // productListData = [
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      //   ProductData(
+      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      //   ProductData(
+      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      //   ProductData(
+      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      //   ProductData(
+      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
+      //   ProductData(
+      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
+      //   ProductData(
+      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
+      // ];
     });
   }
 
