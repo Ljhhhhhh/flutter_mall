@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/components/icon.dart';
+import 'package:dio/dio.dart';
 // import 'package:flutter_mall/main.dart';
 import 'package:flutter_mall/product/ProductData.dart';
 import 'package:flutter_mall/product/ProductItem.dart';
@@ -28,6 +29,8 @@ class HomeWidgetState extends StatefulWidget {
 class _MyHomePageState extends State<HomeWidgetState> {
   int currentIndex = 0;
   List<ProductData> productListData = new List<ProductData>();
+  Response<dynamic> response;
+  Dio dio = Dio();
 
   // void _onItemTapped(int index) {
   //   setState(() {
@@ -42,19 +45,17 @@ class _MyHomePageState extends State<HomeWidgetState> {
     // print(productListData);
   }
 
-  void _getData() {
+  void _getData() async {
+    response = await dio.get(
+        'https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&city=宁波&start=0&count=6&client=&udid=');
+    var data = response.data;
+    List<ProductData> newEntries = new List();
+    for (dynamic product in data['subjects']) {
+      ProductData productData = ProductData.fromJson(product);
+      newEntries.add(productData);
+    }
     setState(() {
-      productListData = [];
-      // productListData = [
-      //   ProductData(
-      //       '奔驰', 3300, 4500, 'http://img.cixi518.com/ljh_logo.jpeg', 1234),
-      //   ProductData(
-      //       '宝马', 4300, 5500, 'http://img.cixi518.com/ljh_logo.jpeg', 2345),
-      //   ProductData(
-      //       '奥迪', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 3456),
-      //   ProductData(
-      //       '路虎', 6300, 7500, 'http://img.cixi518.com/ljh_logo.jpeg', 4567),
-      // ];
+      productListData = newEntries;
     });
   }
 
