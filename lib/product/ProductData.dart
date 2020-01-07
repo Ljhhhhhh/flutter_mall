@@ -1,11 +1,22 @@
 class ProductData {
   String name;
-  int priceDown;
-  int priceUp;
+  var priceDown;
+  var priceUp;
   String mainImg;
   int storeNum;
 
-  ProductData(this.name, this.priceDown, this.priceUp, this.mainImg, this.storeNum);
+  ProductData();
+  factory ProductData.fromJson(Map<String, dynamic> productDataJson) {
+    ProductData productData = ProductData();
+    productData.name = productDataJson['title'];
+    productData.mainImg = productDataJson['images']['small'];
+    productData.storeNum = productDataJson['collect_count'];
+    productData.priceDown = productDataJson['rating']['average'];
+    productData.priceUp = productDataJson['rating']['average'] + 2;
+    return productData;
+  }
+
+  
 
   // factory ProductData.fromJson(Map<String, dynamic> movieDataJson) {
   //   ProductData productData = ProductData();
