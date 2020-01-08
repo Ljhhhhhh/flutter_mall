@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
-  final _widgetItems = [HomeWidget(), UserWidget()];
+  final _widgetItems = [HomeWidget(), UserCenter()];
 
   void _onItemTapped(int index) {
     setState(() {
