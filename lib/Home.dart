@@ -60,6 +60,38 @@ class _MyHomePageState extends State<HomeWidgetState> {
   }
 
   Widget build(BuildContext context) {
+    Widget listContainer = GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, //每行三列
+            childAspectRatio: 172.5 / 232 //显示区域宽高相等
+            ),
+        itemCount: productListData.length,
+        itemBuilder: (context, index) {
+          if (productListData.length == 0) {
+            return Text('加载中……');
+          }
+          return ProductItem(productListData[index]);
+        });
+
+    if (productListData.length == 0) {
+      listContainer = Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          CircularProgressIndicator(
+            strokeWidth: 4.0,
+            semanticsLabel: '加载中',
+            ),
+          Container(
+            width: 15,
+          ),
+          Text('数据加载中……', style: TextStyle(
+            fontSize: 18,
+            color: Colors.blue
+          ))
+        ]);
+    }
     return Scaffold(
       backgroundColor: Color(0xFFF3F4F6),
       appBar: AppBar(
@@ -254,29 +286,9 @@ class _MyHomePageState extends State<HomeWidgetState> {
               ],
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, //每行三列
-                    childAspectRatio: 172.5 / 232 //显示区域宽高相等
-                    ),
-                itemCount: productListData.length,
-                itemBuilder: (context, index) {
-                  return ProductItem(productListData[index]);
-                }
-                // children: <Widget>[
-                //   ,
-                //   ],
-                ),
-          )
+          Expanded(flex: 1, child: listContainer)
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }

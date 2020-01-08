@@ -23,14 +23,10 @@ class ProductListWidget extends State<ProductList> {
     super.initState();
     _getData();
     _scrollController.addListener(() {
-//      print("滑动pixels："+_scrollController.position.pixels.toString());
-//      print("滑动maxScrollExtent："+_scrollController.position.maxScrollExtent.toString());
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         _getMoreData();
       }
     });
-    // print(productListData);
   }
 
   void dispose() {
@@ -114,19 +110,7 @@ class ProductListWidget extends State<ProductList> {
     });
   }
 
-  Widget _buildProgressIndicator() {
-    return Container(
-      // padding: const EdgeInsets.all(8.0),
-      child: Text('加载中……'),
-      // child:
-      //     Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-      //   new Opacity(
-      //     opacity: isPerformingRequest ? 1.0 : 0.0,
-      //     child: new CircularProgressIndicator(),
-      //   )
-      // ]),
-    );
-  }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,17 +148,23 @@ class ProductListWidget extends State<ProductList> {
                     crossAxisCount: 2, //每行三列
                     childAspectRatio: 172.5 / 232 //显示区域宽高相等
                     ),
-                itemCount: productListData.length,
+                itemCount: productListData.length + 1,
                 itemBuilder: (context, index) {
                   if (index == productListData.length) {
-                    // return LoadingIndicator(dataLoader: dataLoader);
-                    return _buildProgressIndicator();
+                    if (productListData.length < total) {
+                      return LoadMoreView();
+                    }
+                    if (productListData.length == 0 && total == 0) {
+                      return LoadMoreView();
+                    }
+                    return Center( child: Text('已全部加装'));
                   } else {
                     return ProductItem(productListData[index]);
                   }
                 },
                 controller: _scrollController,
               ),
+              
             ),
           ),
           
@@ -183,4 +173,18 @@ class ProductListWidget extends State<ProductList> {
     );
     // return
   }
+}
+
+class LoadMoreView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(child: Center(
+        child: Row(children: <Widget>[
+          new CircularProgressIndicator(),
+          Padding(padding: EdgeInsets.all(10)),
+          Text('加载中...')
+        ], mainAxisAlignment: MainAxisAlignment.center,),
+    ), color: Colors.white70,);
+  }
+
 }
