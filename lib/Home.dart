@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/components/icon.dart';
 import 'package:dio/dio.dart';
-// import 'package:flutter_mall/main.dart';
 import 'package:flutter_mall/product/ProductData.dart';
 import 'package:flutter_mall/product/ProductItem.dart';
-import 'package:flutter_mall/product/ProductList.dart';
 // import 'package:flutter_mall/product/ProductList.dart';
 
 void main() => runApp(HomeWidget());
