@@ -84,7 +84,53 @@ class UserCenterWidger extends State<UserCenter> {
                         width: 355,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[Text('我的订单')],
+                          children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Text('我的订单',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Color(0xFF333333),
+                                                fontWeight: FontWeight.bold,
+                                                height: 21 / 15)),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: <Widget>[
+                                            Text('查看全部订单',
+                                                style: TextStyle(
+                                                    color: Color(0xFF999999),
+                                                    fontSize: 13)),
+                                            // Container(width: 2),
+                                            Icon(
+                                              Icons.keyboard_arrow_right,
+                                              color: Color(0xFF999999),
+                                              size: 24,
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Divider(
+                                      height: 30.0,
+                                      indent: 0.0,
+                                      color: Color(0xFFE6E6E6),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ),
