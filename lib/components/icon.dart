@@ -13,6 +13,27 @@ class Iconfont{
       fontFamily: 'iconfont', 
       matchTextDirection: true
   );
+
+  static const IconData status1 = const IconData(
+      0xe61a, 
+      fontFamily: 'iconfont', 
+      matchTextDirection: true
+  );
+  static const IconData status2 = const IconData(
+      0xe619, 
+      fontFamily: 'iconfont', 
+      matchTextDirection: true
+  );
+  static const IconData status3 = const IconData(
+      0xe618, 
+      fontFamily: 'iconfont', 
+      matchTextDirection: true
+  );
+  static const IconData status4 = const IconData(
+      0xe617, 
+      fontFamily: 'iconfont', 
+      matchTextDirection: true
+  );
   // 微信图标
   // static const IconData wechat = const IconData(
   //     0xec7d,  

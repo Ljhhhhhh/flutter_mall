@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mall/components/icon.dart';
 
 class UserCenter extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return UserCenterWidger();
+    return UserCenterWidget();
   }
 }
 
-class UserCenterWidger extends State<UserCenter> {
+class UserCenterWidget extends State<UserCenter> {
   @override
+
+  Widget statusWidget() {
+    
+    return Column(
+              children: <Widget>[
+                Icon(Iconfont.status1, color: Color(0xFF666666)),
+                Container(height: 6,),
+                Text('待确认', style: TextStyle(
+                  fontSize: 12,
+                  height: 16.5 / 12,
+                  color: Color(0xFF666666)
+                ),)
+              ],
+            );
+  }
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
@@ -122,10 +138,19 @@ class UserCenterWidger extends State<UserCenter> {
                                       ],
                                     ),
                                     Divider(
-                                      height: 30.0,
+                                      height: 24.0,
                                       indent: 0.0,
                                       color: Color(0xFFE6E6E6),
                                     ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        statusWidget(),
+                                        statusWidget(),
+                                        statusWidget(),
+                                        statusWidget(),
+                                      ],
+                                    )
                                   ],
                                 ),
                               ),
