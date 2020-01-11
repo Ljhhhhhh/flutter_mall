@@ -12,20 +12,20 @@ class UserCenter extends StatefulWidget {
 class UserCenterWidget extends State<UserCenter> {
   @override
 
-  Widget statusWidget() {
-    // https://juejin.im/post/5b4db4a06fb9a04f9e23073e
-    return Column(
-              children: <Widget>[
-                Icon(Iconfont.status1, color: Color(0xFF666666)),
-                Container(height: 6,),
-                Text('待确认', style: TextStyle(
-                  fontSize: 12,
-                  height: 16.5 / 12,
-                  color: Color(0xFF666666)
-                ),)
-              ],
-            );
-  }
+  // Widget statusWidget() {
+  //   // https://juejin.im/post/5b4db4a06fb9a04f9e23073e
+  //   return Column(
+  //             children: <Widget>[
+  //               Icon(Iconfont.status1, color: Color(0xFF666666)),
+  //               Container(height: 6,),
+  //               Text('待确认', style: TextStyle(
+  //                 fontSize: 12,
+  //                 height: 16.5 / 12,
+  //                 color: Color(0xFF666666)
+  //               ),)
+  //             ],
+  //           );
+  // }
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
@@ -145,10 +145,10 @@ class UserCenterWidget extends State<UserCenter> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                                       children: <Widget>[
-                                        statusWidget(),
-                                        statusWidget(),
-                                        statusWidget(),
-                                        statusWidget(),
+                                        statusWidget('待确认', 'status1'),
+                                        statusWidget('待发货', '123'),
+                                        statusWidget('待收货', '123'),
+                                        statusWidget('已取消', '123'),
                                       ],
                                     )
                                   ],
@@ -165,5 +165,34 @@ class UserCenterWidget extends State<UserCenter> {
             ],
           ),
         ));
+  }
+}
+
+class statusWidget extends StatelessWidget {
+  final String status;
+  final String statusIcon;
+  
+  getIcon() {
+    return Iconfont[statusIcon];
+  }
+
+  //数据可以通过构造方法传递进来
+  statusWidget(this.status, this.statusIcon);
+
+  @override
+  Widget build(BuildContext context) {
+    //这里返回你需要的控件
+    //这里末尾有没有的逗号，对于格式化代码而已是不一样的。
+    return Column(
+            children: <Widget>[
+              Icon(getIcon(), color: Color(0xFF666666)),
+              Container(height: 6,),
+              Text(status, style: TextStyle(
+                fontSize: 12,
+                height: 16.5 / 12,
+                color: Color(0xFF666666)
+              ),)
+            ],
+          );
   }
 }
