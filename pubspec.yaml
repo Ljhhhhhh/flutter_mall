@@ -50,6 +50,11 @@ flutter:
    - images/home-supplier_icon.png
    - images/sort-icon.png
    - images/gender2.png
+   - images/my-store.png
+   - images/user-menu1.png
+   - images/user-menu2.png
+   - images/user-menu3.png
+   - images/user-menu4.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

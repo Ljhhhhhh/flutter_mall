@@ -11,6 +11,22 @@ class UserCenter extends StatefulWidget {
 
 class UserCenterWidget extends State<UserCenter> {
   @override
+  // Widget stateWidget;
+  
+  // Widget StateWidgetBuild() {
+  //   final statusMap = [
+  //   StatusItem('待确认', 'status1'),
+  //   StatusItem('待发货', 'status2'),
+  //   StatusItem('待收货', 'status3'),
+  //   StatusItem('已取消', 'status4'),
+  // ];
+  // Widget content;
+  // for (var item in statusMap) {
+  //   content
+  // }
+  // }
+
+  
 
   // Widget statusWidget() {
   //   // https://juejin.im/post/5b4db4a06fb9a04f9e23073e
@@ -121,7 +137,8 @@ class UserCenterWidget extends State<UserCenter> {
                                                 fontWeight: FontWeight.bold,
                                                 height: 21 / 15)),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
                                           children: <Widget>[
                                             Text('查看全部订单',
                                                 style: TextStyle(
@@ -143,13 +160,15 @@ class UserCenterWidget extends State<UserCenter> {
                                       color: Color(0xFFE6E6E6),
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: <Widget>[
-                                        statusWidget('待确认', 'status1'),
-                                        statusWidget('待发货', '123'),
-                                        statusWidget('待收货', '123'),
-                                        statusWidget('已取消', '123'),
+                                        StatusWidget('待确认', 'status1'),
+                                        StatusWidget('待发货', 'status2'),
+                                        StatusWidget('待收货', 'status3'),
+                                        StatusWidget('已取消', 'status4'),
                                       ],
+                                      // children: [],
                                     )
                                   ],
                                 ),
@@ -161,38 +180,139 @@ class UserCenterWidget extends State<UserCenter> {
                     ),
                   )
                 ],
-              )
+              ),
+              Container(
+                  margin: EdgeInsets.fromLTRB(0,68.5, 0, 10),
+                  // width: 375,
+                  height: 125,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        'images/my-store.png',
+                        width: MediaQuery.of(context).size.width - 20,
+                        height: 125,
+                        // fit: BoxFit.cover
+                      )
+                    ],
+                  )),
+                  Container(
+                    height: 160,
+                    width: MediaQuery.of(context).size.width - 20,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('常用服务', style: TextStyle(
+                              color: Color(0xFF333333),
+                              fontSize: 15,
+                              height: 21 / 15,
+                              fontWeight: FontWeight.bold
+                            )),
+                            Container(height: 14.5),
+                            Divider(
+                              color: Color(0xFFE6E6E6),
+                            ),
+                            Container(height: 14.5),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                MenuWidget('我的收藏','images/user-menu1.png'),
+                                MenuWidget('收货地址','images/user-menu2.png'),
+                                MenuWidget('我的资料','images/user-menu3.png'),
+                                MenuWidget('联系商家','images/user-menu4.png'),
+                              ],
+                            )
+                          ],
+                        ),
+                        )
+                    ),
+                  )
             ],
           ),
         ));
   }
 }
 
-class statusWidget extends StatelessWidget {
+class StatusItem {
   final String status;
   final String statusIcon;
-  
-  getIcon() {
-    return Iconfont[statusIcon];
+  StatusItem(this.status, this.statusIcon);
+}
+
+class StatusWidget extends StatelessWidget {
+  final String status;
+  final String statusIcon;
+
+  getIcon(String icon) {
+    switch (icon) {
+      case 'status1':
+        return Iconfont.status1;
+        break;
+      case 'status2':
+        return Iconfont.status2;
+        break;
+      case 'status3':
+        return Iconfont.status3;
+        break;
+      case 'status4':
+        return Iconfont.status4;
+        break;
+      default:
+    }
   }
 
   //数据可以通过构造方法传递进来
-  statusWidget(this.status, this.statusIcon);
+  StatusWidget(this.status, this.statusIcon);
 
   @override
   Widget build(BuildContext context) {
     //这里返回你需要的控件
     //这里末尾有没有的逗号，对于格式化代码而已是不一样的。
     return Column(
-            children: <Widget>[
-              Icon(getIcon(), color: Color(0xFF666666)),
-              Container(height: 6,),
-              Text(status, style: TextStyle(
-                fontSize: 12,
-                height: 16.5 / 12,
-                color: Color(0xFF666666)
-              ),)
-            ],
-          );
+      children: <Widget>[
+        Icon(getIcon(statusIcon), color: Color(0xFF666666)),
+        Container(
+          height: 6,
+        ),
+        Text(
+          status,
+          style: TextStyle(
+              fontSize: 12, height: 16.5 / 12, color: Color(0xFF666666)),
+        )
+      ],
+    );
+  }
+}
+
+class MenuWidget extends StatelessWidget {
+  final String status;
+  final String statusIcon;
+
+  //数据可以通过构造方法传递进来
+  MenuWidget(this.status, this.statusIcon);
+
+  @override
+  Widget build(BuildContext context) {
+    //这里返回你需要的控件
+    //这里末尾有没有的逗号，对于格式化代码而已是不一样的。
+    return Column(
+      children: <Widget>[
+        // Icon(getIcon(statusIcon), color: Color(0xFF666666)),
+        Image.asset(statusIcon, height: 35, width: 35),
+        Container(
+          height: 8,
+        ),
+        Text(
+          status,
+          style: TextStyle(
+              fontSize: 12, height: 16.5 / 12, color: Color(0xFF666666)),
+        )
+      ],
+    );
   }
 }
