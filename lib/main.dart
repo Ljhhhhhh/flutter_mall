@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mall/Home.dart';
 import 'package:flutter_mall/product/ProductList.dart';
 import 'package:flutter_mall/userCenter.dart';
+import 'package:flutter_mall/userInfo.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => MyHomePage(),
         '/Product': (context) => ProductList(),
+        '/Userinfo': (context) => UserinfoWidget()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

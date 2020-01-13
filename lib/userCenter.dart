@@ -298,9 +298,8 @@ class MenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //这里返回你需要的控件
-    //这里末尾有没有的逗号，对于格式化代码而已是不一样的。
-    return Column(
+    return GestureDetector(
+      child: Column(
       children: <Widget>[
         // Icon(getIcon(statusIcon), color: Color(0xFF666666)),
         Image.asset(statusIcon, height: 35, width: 35),
@@ -313,6 +312,10 @@ class MenuWidget extends StatelessWidget {
               fontSize: 12, height: 16.5 / 12, color: Color(0xFF666666)),
         )
       ],
+    ),
+      onTap: () {
+        Navigator.of(context).pushNamed("/Userinfo");
+      },
     );
   }
 }
