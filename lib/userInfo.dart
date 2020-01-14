@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mall/components/edit_view.dart';
 
 class UserinfoWidget extends StatefulWidget {
   @override
@@ -9,6 +10,8 @@ class UserinfoWidget extends StatefulWidget {
 
 class UserinfoWidgetState extends State<UserinfoWidget> {
   final _formKey = GlobalKey<FormState>();
+  FocusNode pWF = new FocusNode();
+  TextEditingController pWC = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,20 +60,34 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                     //   ),
                     // ),
                     // https://github.com/fluttercandies/wechat_flutter/blob/master/lib/ui/view/edit_view.dart
-                    TextFormField(
-                      decoration: new InputDecoration(
-                        prefixIcon: Container(
-                          alignment: Alignment.centerLeft,
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          child: Text('手机号码 ', style: TextStyle(fontSize: 16, height: 1),)
-                        ),
-                    ),),
-                    TextFormField(
-                      decoration: new InputDecoration(
-                        prefix: Text('姓名 '),
-                        focusColor: Colors.red
-                    ),),
-                    
+                    // EditView()
+                    new EditView(
+                      label: '密码',
+                      hint: '填写密码',
+                      controller: pWC,
+                      focusNode: pWF,
+                      bottomLineColor: pWF.hasFocus
+                          ? Colors.green
+                          : Colors.grey.withOpacity(0.5),
+                      onTap: () => setState(() {}),
+                      onChanged: (str) {
+                        setState(() {});
+                      },
+                    ),
+                    // TextFormField(
+                    //   decoration: new InputDecoration(
+                    //     prefixIcon: Container(
+                    //       alignment: Alignment.centerLeft,
+                    //       // mainAxisAlignment: MainAxisAlignment.center,
+                    //       child: Text('手机号码 ', style: TextStyle(fontSize: 16, height: 1),)
+                    //     ),
+                    // ),),
+                    // TextFormField(
+                    //   decoration: new InputDecoration(
+                    //     prefix: Text('姓名 '),
+                    //     focusColor: Colors.red
+                    // ),),
+
                     // TextFormField(
                     //   decoration: const InputDecoration(
                     //     hintText: '请输入姓名',
