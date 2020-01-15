@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class EditView extends StatelessWidget {
   final String label;
   final String hint;
+  final bool readOnly;
   final TextEditingController controller;
   final Color bottomLineColor;
   final FocusNode focusNode;
@@ -18,6 +19,7 @@ class EditView extends StatelessWidget {
       this.bottomLineColor,
       this.focusNode,
       this.onTap,
+      this.readOnly,
       this.onChanged});
 
   @override
@@ -29,13 +31,14 @@ class EditView extends StatelessWidget {
     var row = new Row(
       children: <Widget>[
         new Container(
-          width: winWidth(context) * 0.25,
+          width: winWidth(context) * 0.20,
           alignment: Alignment.centerLeft,
           child: new Text(label ?? '',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
         ),
         new Expanded(
           child: new TextField(
+            readOnly: readOnly ?? false,
             style: TextStyle(textBaseline: TextBaseline.alphabetic),
             controller: controller,
             focusNode: focusNode,
