@@ -26,6 +26,7 @@ dependencies:
   dio: ^3.0.8
   json_serializable: ^3.2.5
   flutter_cupertino_date_picker: ^1.0.12
+  address_picker: ^0.0.1
 
 dev_dependencies:
   flutter_test:

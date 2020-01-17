@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/components/edit_view.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import 'package:address_picker/address_picker.dart';
 
 class UserinfoWidget extends StatefulWidget {
   @override
@@ -141,9 +142,7 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                           controller: pWC,
                           // focusNode: pWF,
                           bottomLineColor: Colors.grey.withOpacity(0.5),
-                          onTap: () => {
-                            _showTimePicker()
-                          },
+                          onTap: () => {_showTimePicker()},
                           onChanged: (str) {
                             setState(() {});
                           },
@@ -159,6 +158,15 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                             setState(() {});
                           },
                         ),
+                        // AddressPicker(
+                        //   style: TextStyle(color: Colors.black, fontSize: 17),
+                        //   mode: AddressPickerMode.provinceCityAndDistrict,
+                        //   onSelectedAddressChanged: (address) {
+                        //     print('${address.currentProvince.province}');
+                        //     print('${address.currentCity.city}');
+                        //     print('${address.currentDistrict.area}');
+                        //   },
+                        // ),
                         new EditView(
                           label: '所在地区',
                           hint: '填写所在地区',
@@ -167,7 +175,31 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                           // https://pub.flutter-io.cn/packages/slide_popup_dialog#-example-tab-
                           // focusNode: pWF,
                           bottomLineColor: Colors.grey.withOpacity(0.5),
-                          onTap: () => setState(() {}),
+                          onTap: () => {
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) => BottomSheet(
+                                    onClosing: () {},
+                                    builder: (context) => Container(
+                                          height: 250.0,
+                                          child: AddressPicker(
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 17),
+                                            mode: AddressPickerMode
+                                                .provinceCityAndDistrict,
+                                            onSelectedAddressChanged:
+                                                (address) {
+                                              print(
+                                                  '${address.currentProvince.province}');
+                                              print(
+                                                  '${address.currentCity.city}');
+                                              print(
+                                                  '${address.currentDistrict.area}');
+                                            },
+                                          ),
+                                        )))
+                          },
                           onChanged: (str) {
                             setState(() {});
                           },
