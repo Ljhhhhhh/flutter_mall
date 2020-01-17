@@ -15,8 +15,9 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
   FocusNode pWF = new FocusNode();
   TextEditingController pWC = new TextEditingController();
   TextEditingController pWAdd = new TextEditingController();
+  TextEditingController pName = new TextEditingController();
   String _format = 'yyyy-MM-dd';
-  TextEditingController _formatCtrl = TextEditingController();
+  // TextEditingController _formatCtrl = TextEditingController();
   DateTime _dateTime;
 
   void _showTimePicker() {
@@ -114,7 +115,7 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                         new EditView(
                           label: '姓名',
                           hint: '填写姓名',
-                          controller: pWC,
+                          controller: pName,
                           // focusNode: pWF,
                           bottomLineColor: Colors.grey.withOpacity(0.5),
                           onTap: () => setState(() {}),

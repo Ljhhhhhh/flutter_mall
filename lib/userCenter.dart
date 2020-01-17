@@ -46,7 +46,8 @@ class UserCenterWidget extends State<UserCenter> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(centerTitle: true, title: Text('我的')),
-        body: Container(
+        body: SingleChildScrollView(
+          child: Container(
           color: Color(0xffF3F4F6),
           child: Column(
             children: <Widget>[
@@ -199,6 +200,7 @@ class UserCenterWidget extends State<UserCenter> {
                   Container(
                     height: 160,
                     width: MediaQuery.of(context).size.width - 20,
+                    margin: EdgeInsets.only(bottom: 10),
                     child: Material(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -234,7 +236,7 @@ class UserCenterWidget extends State<UserCenter> {
                   )
             ],
           ),
-        ));
+        )));
   }
 }
 
