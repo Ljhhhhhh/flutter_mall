@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mall/components/edit_view.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:address_picker/address_picker.dart';
+import 'package:flutter_mall/redux/gsy_state.dart';
+import 'package:flutter_mall/redux/theme_redux.dart';
+import 'package:flutter_mall/style/gsy_style.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:redux/redux.dart';
 
 class UserinfoWidget extends StatefulWidget {
   @override
@@ -16,7 +21,9 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
   FocusNode pWF = new FocusNode();
   TextEditingController pWC = new TextEditingController();
   TextEditingController pWAdd = new TextEditingController();
-  TextEditingController pName = new TextEditingController();
+  // TextEditingController pName = new TextEditingController();
+  TextEditingController pName =
+      new TextEditingController.fromValue(TextEditingValue(text: 'hello LJH'));
   String _format = 'yyyy-MM-dd';
   // TextEditingController _formatCtrl = TextEditingController();
   DateTime _dateTime;
@@ -69,6 +76,18 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
     );
   }
 
+    static List<Color> getThemeListColor() {
+    return [
+      GSYColors.primarySwatch,
+      Colors.brown,
+      Colors.blue,
+      Colors.teal,
+      Colors.amber,
+      Colors.blueGrey,
+      Colors.deepOrange,
+    ];
+  }
+
   Widget build(BuildContext context) {
     double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
@@ -78,7 +97,10 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
         appBar: AppBar(
           title: Text('我的资料'),
         ),
-        body: SingleChildScrollView(
+        body: StoreBuilder<GSYState>(
+          builder: (context, store) {
+            // User user = store.state.userInfo;
+            return SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -119,7 +141,9 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
                           controller: pName,
                           // focusNode: pWF,
                           bottomLineColor: Colors.grey.withOpacity(0.5),
-                          onTap: () => setState(() {}),
+                          onTap: () => {
+                            CommonUtils.pushTheme(store, 1)
+                          },
                           onChanged: (str) {
                             setState(() {});
                           },
@@ -226,6 +250,32 @@ class UserinfoWidgetState extends State<UserinfoWidget> {
               )
             ],
           ),
-        ));
+        );
+          },
+        )
+        );
+  }
+}
+
+class CommonUtils {
+  static pushTheme(Store store, int index) {
+    ThemeData themeData;
+    List<Color> colors = getThemeListColor();
+    themeData = getThemeData(colors[index]);
+    store.dispatch(new RefreshThemeDataAction(themeData));
+  }
+  static List<Color> getThemeListColor() {
+    return [
+      GSYColors.primarySwatch,
+      Colors.brown,
+      Colors.blue,
+      Colors.teal,
+      Colors.amber,
+      Colors.blueGrey,
+      Colors.deepOrange,
+    ];
+  }
+  static getThemeData(Color color) {
+    return ThemeData(primarySwatch: color, platform: TargetPlatform.android);
   }
 }

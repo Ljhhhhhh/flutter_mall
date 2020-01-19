@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mall/redux/User.dart';
-import 'package:flutter_mall/redux/middleware/epic_middleware.dart';
-import 'package:flutter_mall/redux/user_redux.dart';
-import 'package:redux/redux.dart';
-
+import 'package:flutter_mall/redux/theme_redux.dart';
 /**
  * Redux全局State
  * Created by guoshuyu
@@ -13,10 +9,10 @@ import 'package:redux/redux.dart';
 ///全局Redux store 的对象，保存State数据
 class GSYState {
   ///用户信息
-  User userInfo;
+  ThemeData themeData;
 
   ///构造方法
-  GSYState({this.userInfo});
+  GSYState({this.themeData});
 }
 
 ///创建 Reducer
@@ -25,14 +21,11 @@ class GSYState {
 GSYState appReducer(GSYState state, action) {
   return GSYState(
     ///通过 UserReducer 将 GSYState 内的 userInfo 和 action 关联在一起
-    userInfo: UserReducer(state.userInfo, action),
+    themeData: ThemeDataReducer(state.themeData, action),
 
   );
 }
 
-final List<Middleware<GSYState>> middleware = [
-  EpicMiddleware<GSYState>(UserInfoEpic()),
-  EpicMiddleware<GSYState>(LoginEpic()),
-  UserInfoMiddleware(),
-  LoginMiddleware(),
-];
+// final List<Middleware<GSYState>> middleware = [
+//   UserInfoMiddleware(),
+// ];
