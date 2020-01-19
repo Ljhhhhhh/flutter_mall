@@ -48,22 +48,3 @@ class UserInfoMiddleware implements MiddlewareClass<GSYState> {
     next(action);
   }
 }
-
-class UserInfoEpic implements EpicClass<GSYState> {
-  @override
-  Stream<dynamic> call(Stream<dynamic> actions, EpicStore<GSYState> store) {
-    return Observable(actions)
-        // to UpdateUserAction actions
-        .whereType<FetchUserAction>()
-        // Don't start  until the 10ms
-        .debounce(((_) => TimerStream(true, const Duration(milliseconds: 10))))
-        .switchMap((action) => _loadUserInfo());
-  }
-
-  // Use the async* function to make easier
-  Stream<dynamic> _loadUserInfo() async* {
-    print("*********** userInfoEpic _loadUserInfo ***********");
-    var res = await UserDao.getUserInfo(null);
-    yield UpdateUserAction(res.data);
-  }
-}
